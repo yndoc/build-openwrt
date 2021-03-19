@@ -266,6 +266,19 @@ jobs:
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "BOT=TRUE" >> $GITHUB_ENV
         echo "::set-output name=status::success"
+        
+
+    - name: Remove files
+      if: set-output name=status::success
+      run: |
+        cd openwrt/bin/targets/*/*
+        rm -rf *-s9xxx-*img.gz
+        rm -rf *-rk3328-*img.gz
+        rm -rf *-vplus-*img.gz
+        rm -rf openwrt/bin/targets/armvirt/64/openwrt-armvirt-64-root.squashfs.gz
+        rm -rf openwrt/bin/targets/armvirt/64/openwrt-armvirt-64-rootfs.cpio.gz   
+        cd openwrt/bin/targets/*/*
+        echo "FIRMWARE=$PWD" >> $GITHUB_ENV
     
     - name: 上传.config配置文件在github actions
       uses: actions/upload-artifact@v2
