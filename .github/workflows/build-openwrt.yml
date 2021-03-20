@@ -268,15 +268,15 @@ jobs:
         echo "::set-output name=status::success"
         
 
-   # - name: Remove files
-   #   if: steps.compile.outputs.status == 'success'
-    #  run: |
-   #     cd openwrt/bin/targets/*/*
-   #     rm -rf *-s9xxx-*img.gz
-   #     rm -rf *-rk3328-*img.gz
-   #     rm -rf *-vplus-*img.gz 
-  #      cd openwrt/bin/targets/*/*
-  #      echo "FIRMWARE=$PWD" >> $GITHUB_ENV
+    - name: Remove files
+      if: steps.compile.outputs.status == 'success'
+      run: |
+        cd openwrt/bin/targets/*/*
+        rm -rf *-s9xxx-*img.gz
+        rm -rf *-rk3328-*img.gz
+        rm -rf *-vplus-*img.gz 
+        cd openwrt/bin/targets/*/*
+        echo "FIRMWARE=$PWD" >> $GITHUB_ENV
     
     - name: 上传.config配置文件在github actions
       uses: actions/upload-artifact@v2
