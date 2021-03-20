@@ -269,7 +269,7 @@ jobs:
         
 
     - name: Remove files
-      if: set-output name=status::success
+      if: steps.compile.outputs.status == 'success'
       run: |
         cd openwrt/bin/targets/*/*
         rm -rf *-s9xxx-*img.gz
